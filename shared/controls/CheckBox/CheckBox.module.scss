@@ -1,0 +1,62 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+}
+
+.label {
+  color: #000000;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.checkWrapper {
+  position: relative;
+  height: 18px;
+  width: 18px;
+
+  .input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: inherit;
+    height: inherit;
+    border: 2px solid #828282;
+    border-radius: 2px;
+    transition: border-color $default-duration $default-duration-func;
+
+    &:checked {
+      border-color: $active-color;
+
+      & + .svg {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    &:disabled {
+      border-color: #E0E0E0;
+    }
+  }
+
+  .svg {
+    visibility: hidden;
+    fill: none;
+    stroke: white;
+    background: $active-color;
+    stroke-width: 2px;
+    position: absolute;
+    left: 2px;
+    opacity: 0;
+    top: 2px;
+    transition: visibility $default-duration $default-duration-func, opacity $default-duration $default-duration-func;
+  }
+
+  &:hover {
+    .input:enabled {
+      border-color: $active-color;
+    }
+  }
+}

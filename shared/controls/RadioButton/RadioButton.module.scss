@@ -1,0 +1,57 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+}
+
+.input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #828282;
+  border-radius: 50%;
+  transition: border-color $default-duration $default-duration-func;
+  &::after {
+    content: "";
+    display: block;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 3px;
+  }
+
+  &:hover {
+    border-color: $active-color;
+  }
+
+  &:checked {
+    border-color: $active-color;
+    &::after {
+      background: $active-color;
+    }
+  }
+
+  &:disabled {
+    border-color: #EEEEEE;
+
+    & + label {
+      color: #BDBDBD;
+    }
+  }
+
+  &:disabled:checked {
+    &::after {
+      background: #EEEEEE;
+    }
+  }
+}
+
+.label {
+  color: #000000;
+  font-size: 14px;
+  line-height: 18px;
+}
