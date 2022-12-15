@@ -8,7 +8,7 @@ type Props = {
 	text: string;
 }
 
-const CheckBox = ({checked, text, onClick, disabled = false}: Props) => {
+const CheckBox = ({checked, text, onClick = () => {}, disabled = false}: Props) => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.checkWrapper} onClick={onClick}>

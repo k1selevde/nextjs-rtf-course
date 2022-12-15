@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Test {
+  id           Int    @default(autoincrement()) @id
+  title        String
+  time         Int
+  questions    Question[]
+}
+
+model Question {
+    id     Int    @id @default(autoincrement())
+    test   Test   @relation(fields: [testId], references: [id])
+    testId Int
+    text   String
+    type   OptionType   @default(CHECKBOX)
+    options  Option[]
+    isAnswered Boolean   @default(false)
+}
+
+model Option {
+    id     Int    @id @default(autoincrement())
+    title  String
+    questions Question[]
+}
+
+enum OptionType {
+    CHECKBOX
+    RADIO
+}

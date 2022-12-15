@@ -8,7 +8,7 @@ type Props = {
 	text: string;
 }
 
-const RadioButton = ({checked, text, onChange, disabled = false}: Props) => {
+const RadioButton = ({checked, text, onChange = () => {}, disabled = false}: Props) => {
 	return (
 		<div className={styles.wrapper}>
 			<input

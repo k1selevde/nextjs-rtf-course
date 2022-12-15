@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.part {
+  color: $action-color;
+  font-size: 24px;
+  font-weight: 500;
+}
