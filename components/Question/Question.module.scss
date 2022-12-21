@@ -11,6 +11,10 @@
   gap: 10px;
   width: 840px;
   flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    width: 420px
+  }
 }
 
 .text {
@@ -18,4 +22,16 @@
   margin-bottom: 40px;
   font-size: 16px;
   color: #333333;
+}
+
+.actions {
+  display: flex;
+  gap: 30px;
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
 }

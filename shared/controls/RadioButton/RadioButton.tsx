@@ -4,11 +4,12 @@ import styles from './RadioButton.module.scss';
 type Props = {
 	checked: boolean;
 	disabled?: boolean;
-	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+	onChange?: (id: number) => void;
 	text: string;
+	id: number
 }
 
-const RadioButton = ({checked, text, onChange = () => {}, disabled = false}: Props) => {
+const RadioButton = ({id, checked, text, onChange = () => {}, disabled = false}: Props) => {
 	return (
 		<div className={styles.wrapper}>
 			<input
@@ -16,7 +17,7 @@ const RadioButton = ({checked, text, onChange = () => {}, disabled = false}: Pro
 				checked={checked}
 				disabled={disabled}
 				id={styles.input}
-				onChange={onChange}
+				onChange={() => onChange(id)}
 				type="radio"
 			/>
 			<label className={styles.label} htmlFor={styles.input}>

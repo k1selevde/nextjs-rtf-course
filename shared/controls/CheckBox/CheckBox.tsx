@@ -4,14 +4,15 @@ import styles from './CheckBox.module.scss';
 type Props = {
 	checked: boolean;
 	disabled?: boolean;
-	onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+	onClick?: (id: number) => void;
 	text: string;
+	id: number;
 }
 
-const CheckBox = ({checked, text, onClick = () => {}, disabled = false}: Props) => {
+const CheckBox = ({id, text, checked = true, onClick = () => {}, disabled = false}: Props) => {
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.checkWrapper} onClick={onClick}>
+			<div className={styles.checkWrapper} onClick={() => onClick(id)}>
 				<input
 					className={styles.input}
 					checked={checked}

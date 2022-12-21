@@ -15,7 +15,6 @@ const Navbar = (props: Props) => {
 	const renderLink = (question: any, index: number) => {
 		const id = index + 1;
 		const {isAnswered, id: dbId} = question;
-
 		const linkCN = cn({
 			[styles.link]: true,
 			[styles.linkActive]: id == currentQuestion,

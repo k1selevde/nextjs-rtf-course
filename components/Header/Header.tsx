@@ -7,7 +7,8 @@ import TestTimer from "../TestTimer/TestTimer";
 
 type Props = {
 	currentQuestion: number | string,
-	questionsCount: number
+	questionsCount: number,
+	title: string
 }
 const Header = (props: Props) => {
 	return (
@@ -16,7 +17,7 @@ const Header = (props: Props) => {
 				<Counter current={props.currentQuestion} total={props.questionsCount}/>
 				<TestTimer minutes={60}/>
 			</div>
-			<h3 className={styles.title}>Title</h3>
+			<h3 className={styles.title}>{props.title}</h3>
 			<Image src={logo} />
 		</div>
 	);

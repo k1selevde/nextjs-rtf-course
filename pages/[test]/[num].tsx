@@ -2,7 +2,6 @@ import React from 'react';
 import styles from 'pages/[test]/[num].module.scss'
 import Header from "../../components/Header/Header";
 import Navbar from "../../components/Navbar/Navbar";
-import Button from "../../shared/controls/Button/Button";
 import Question from "../../components/Question/Question";
 import { useRouter } from 'next/router'
 import prisma from '../../lib/prisma';
@@ -18,28 +17,20 @@ const Num = ({test, currentQuestion}: any) => {
 		router.push(`/1/${nextQuestion}`);
 	}
 
-	const handleAnswerQuestion = async () => {
+	const handleAnswerQuestion = async (answeredIds: number[]) => {
 		await axios
-			.post('/api/question/answer', {currentQuestionId})
+			.post('/api/question/answer', {currentQuestionId, answeredIds})
 			.then(() => {
 				goNextPage()
 			})
 	}
 
-	const renderActions = () => (
-		<div className={styles.actions}>
-			<Button onClick={goNextPage}>ПРОПУСТИТЬ</Button>
-			<Button onClick={handleAnswerQuestion}>ОТВЕТИТЬ</Button>
-		</div>
-	)
-
 	const renderContent = () => (
 		<div className={styles.content}>
-			<Header currentQuestion={currentQuestionId} questionsCount={test.questions.length} />
+			<Header currentQuestion={currentQuestionId} questionsCount={test.questions.length} title={test.title}/>
 			<div className={styles.contentQuestionPosition}>
 				<div className={styles.contentQuestion}>
-					<Question {...currentQuestion} />
-					{renderActions()}
+					<Question {...currentQuestion} cbAnswer={handleAnswerQuestion} cbSkip={goNextPage} />
 				</div>
 			</div>
 		</div>
@@ -47,7 +38,7 @@ const Num = ({test, currentQuestion}: any) => {
 
 	return (
 		<div className={styles.wrapper}>
-			<Navbar questions={test.questions} currentQuestion={currentQuestionId}/>
+			<Navbar questions={test.questions.sort((a: any,b: any) => a.id > b.id)} currentQuestion={currentQuestionId}/>
 			{renderContent()}
 		</div>
 	);
@@ -56,7 +47,11 @@ const Num = ({test, currentQuestion}: any) => {
 export async function getServerSideProps(context: any) {
 	const test = await prisma.test.findFirst({
 		include: {
-			questions: true
+			questions: {
+				orderBy: {
+					id: 'asc',
+				}
+			}
 		}
 	});
 

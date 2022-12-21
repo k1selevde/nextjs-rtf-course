@@ -25,6 +25,7 @@ model Question {
     type   OptionType   @default(CHECKBOX)
     options  Option[]
     isAnswered Boolean   @default(false)
+    checked Int[]  @default([])
 }
 
 model Option {

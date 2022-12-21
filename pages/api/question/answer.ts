@@ -3,13 +3,14 @@ import prisma from "../../../lib/prisma";
 
 export default async function answer(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const {currentQuestionId} = req.body
+		const {currentQuestionId, answeredIds} = req.body
 		await prisma.question.update({
 			where: {
 				id: +currentQuestionId
 			},
 			data: {
-				isAnswered: true
+				isAnswered: !!answeredIds.length,
+				checked: answeredIds
 			}
 		})
 
